@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
-        @SuppressLint({"ResourceType", "MissingInflatedId", "LocalSuppress"}) ImageView background = findViewById(R.drawable.ancient_guardians_logo_tel_login);
     }
 
 }

@@ -8,10 +8,16 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:foregroundGravity=""
         android:alpha="1"
+        android:foregroundGravity=""
         android:orientation="horizontal"
-        tools:srcCompat="@drawable/ancient_guardians_logo_tel_login" />
+        android:src="@drawable/ancient_guardians_logo_tel_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Ancient guardians logo" />
+
     <TextView
         android:id="@+id/idTVHeading1"
         android:layout_width="match_parent"
