@@ -87,7 +87,9 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPromptRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPromptRegister"
+        android:clickable="true"
+        android:onClick="login_fun"/>
 
     <ImageView
         android:id="@+id/imageView"
