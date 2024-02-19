@@ -3,20 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="1"
-        android:foregroundGravity=""
-        android:orientation="horizontal"
-        android:src="@drawable/ancient_guardians_logo_tel_login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Ancient guardians logo" />
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:ignore="HardcodedText">
 
     <TextView
         android:id="@+id/idTVHeading1"
@@ -28,13 +17,89 @@
         android:layout_marginEnd="20dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:textAlignment="center"
         android:padding="10dp"
         android:text="Ancient Guardians"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextLoginUsername"
+        android:layout_width="333dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="55dp"
+        android:autofillHints="username"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="text"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idTVHeading1"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTextLoginPassword"
+        android:layout_width="333dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="password"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginUsername"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textViewPromptRegister"
+        android:layout_width="311dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Don't have an account yet? Tap here"
+        android:textColor="@color/bright_blue"
+        android:textSize="15.5sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginPassword" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/LoginButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/round_button_shape"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPromptRegister" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="311dp"
+        android:layout_height="561dp"
+        android:alpha="0.4"
+        android:contentDescription="Ancient guardians logo"
+        android:orientation="horizontal"
+        android:src="@drawable/ancient_guardians_logo_tel_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
