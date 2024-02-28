@@ -21,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     EditText username_input_field, password_input_field;
     Button login_button;
     @Override
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Clicked login_button");
                 if(TextUtils.isEmpty(username_input_field.getText().toString()) || TextUtils.isEmpty(password_input_field.getText().toString())){
                     System.out.println("Empty username or password field");
-                    Toast.makeText(MainActivity.this, "Username/Password required", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Username/Password required", Toast.LENGTH_LONG).show();
                 }else {
                     login();
                 }
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                     LoginResponse loginResponse = response.body();
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -70,17 +70,17 @@ public class MainActivity extends AppCompatActivity {
                             LoggedUserInfo.surname = loginResponse.getSurname();
                             LoggedUserInfo.email = loginResponse.getEmail();
 
-                            startActivity(new Intent(MainActivity.this, LoggedIn_activity.class));
+                            startActivity(new Intent(LoginActivity.this, MainMapActivity.class));
                         }
                     },700);
                 }else{
-                    Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Throwable "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Throwable "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
