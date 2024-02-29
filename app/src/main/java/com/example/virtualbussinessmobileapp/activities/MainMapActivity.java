@@ -72,8 +72,8 @@ public class MainMapActivity extends AppCompatActivity {
         progressBar_msg.setVisibility(4);
         progressBar.setVisibility(4);
 
+        updateMap(new GeoPoint(38.089355, 23.785459));
         addMarker(map, new GeoPoint(38.089355, 23.785459));
-        mapController.setCenter(new GeoPoint(38.089355,23.785459));
         settings_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

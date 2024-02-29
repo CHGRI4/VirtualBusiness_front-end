@@ -19,8 +19,8 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="332dp"
-        android:layout_height="14dp"
+        android:layout_width="313dp"
+        android:layout_height="17dp"
         android:layout_marginTop="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -31,8 +31,8 @@
         android:id="@+id/settingsButton"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/settings_icon"
         android:backgroundTint="@color/black"
         android:backgroundTintMode="add"
@@ -48,8 +48,8 @@
 
     <org.osmdroid.views.MapView
         android:id="@+id/MainMapView"
-        android:layout_width="408dp"
-        android:layout_height="429dp"
+        android:layout_width="387dp"
+        android:layout_height="421dp"
         android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
@@ -58,10 +58,11 @@
 
     <HorizontalScrollView
         android:id="@+id/markerHorView"
-        android:layout_width="409dp"
-        android:layout_height="147dp"
+        android:layout_width="388dp"
+        android:layout_height="199dp"
         android:layout_marginTop="1dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MainMapView">
 
@@ -89,16 +90,17 @@
             <TextView
                 android:id="@+id/markerInfo"
                 android:layout_width="405dp"
-                android:layout_height="51dp"
+                android:layout_height="130dp"
                 android:text="Ο Ι.Ν. Αγίας Βαρβάρας Χαλανδρίου (Ψυχικού) , είναι μεταβυζαντινός ναός,  κτίσμα των αρχών του 18ου αιώνος, είναι μονόχωρος  καμαροσκέπαστος, με μεταγενέστερη προσθήκη διευρυμένου Νάρθηκα. Ο Ναός εσωτερικά είναι κατάγραφος, πλην της οροφής, από τοιχογραφίες ωσαύτως  του 18ου αιώνος, πολύ καλής τέχνης που αποδίδονται στην Σχολή του Γ. Μάρκου." />
         </LinearLayout>
     </HorizontalScrollView>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView3"
         android:layout_width="182dp"
         android:layout_height="114dp"
-        android:layout_marginEnd="240dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="200dp"
         android:scaleX="1"
         android:scaleY="1"
         android:src="@drawable/barbara_demo"
@@ -108,7 +110,9 @@
     <ImageView
         android:layout_width="169dp"
         android:layout_height="108dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/barbara_demo2"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/markerHorView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,10 +16,17 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_settings_page);
         Button returnToMain = findViewById(R.id.return_to_main);
+        Button logoutBut = findViewById(R.id.settingsLogoutBut);
         returnToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SettingsActivity.this,MainMapActivity.class));
+            }
+        });
+        logoutBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
             }
         });
     }
