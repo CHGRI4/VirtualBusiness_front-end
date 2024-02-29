@@ -4,36 +4,35 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
-import android.os.Looper;
 import android.preference.PreferenceManager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.virtualbussinessmobileapp.R;
-import com.example.virtualbussinessmobileapp.global_data.LocationManaging;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
+import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnTokenCanceledListener;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Marker;
-import android.location.Location;
-import android.location.LocationManager;
-import android.location.provider.ProviderProperties;
+
+import android.widget.Toast;
 
 /** @noinspection ALL*/
 public class MainMapActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
-    @Override public void onCreate(Bundle savedInstanceState) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Context ctx = getApplicationContext();
         //important! set your user agent to prevent getting banned from the osm servers
@@ -41,18 +40,16 @@ public class MainMapActivity extends AppCompatActivity {
         setContentView(R.layout.main_page);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        LocationManaging.getLocPerms(this);
-        Location curLoc = getCurLoc(fusedLocationClient);
-
         MapView map = (MapView) findViewById(R.id.MainMapView);
-        map.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE);
-        map.setBuiltInZoomControls(true);
-        map.setMultiTouchControls(true);
         IMapController mapController = map.getController();
-        mapController.setZoom(8);
-        GeoPoint startPoint = new GeoPoint(/*curLoc.getLatitude()*/23, /*curLoc.getLongitude()*/23);
-        mapController.setCenter(startPoint);
+
+        getLocPerms();
+        getCurLoc(fusedLocationClient);
+
+        mapInit(map);
     }
+
+
     @Override
     protected void onResume(){
         super.onResume();
@@ -62,9 +59,50 @@ public class MainMapActivity extends AppCompatActivity {
         //Configuration.getInstance().save(this, prefs);
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
     }
-    private Location getCurLoc(FusedLocationProviderClient fusedLocationClient2) {
-        fusedLocationClient2.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, locationListener);
+
+
+    private void mapInit(MapView map){
+        map.setTileSource(TileSourceFactory.MAPNIK);
+        map.setBuiltInZoomControls(true);
+        map.setMultiTouchControls(true);
     }
+    private void getCurLoc(FusedLocationProviderClient fusedLocationClient2) {
+        fusedLocationClient2.getCurrentLocation(
+                        Priority.PRIORITY_HIGH_ACCURACY,
+                        new CancellationToken() {
+                            @NonNull
+                            @Override
+                            public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
+                                return null;
+                            }
+
+                            @Override
+                            public boolean isCancellationRequested() {
+                                return false;
+                            }
+                        })
+                .addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location == null) {
+                            Toast.makeText(getApplicationContext(), "Cannot get location.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            double lat = location.getLatitude();
+                            double lon = location.getLongitude();
+                            // Your further processing here
+                            updateMap(new GeoPoint(lat, lon));
+                        }
+                    }
+                });
+    }
+
+    private void updateMap(GeoPoint startPoint) {
+        MapView map = findViewById(R.id.MainMapView);
+        IMapController mapController = map.getController();
+        mapController.setZoom(14.0);
+        mapController.setCenter(startPoint);
+    }
+
     public void getLocPerms() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED
                 && ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED)
