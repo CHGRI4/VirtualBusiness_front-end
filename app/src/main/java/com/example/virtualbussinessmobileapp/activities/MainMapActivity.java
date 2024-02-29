@@ -2,9 +2,12 @@ package com.example.virtualbussinessmobileapp.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
@@ -20,12 +23,20 @@ import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
 
+import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
+import org.w3c.dom.Text;
 
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /** @noinspection ALL*/
@@ -36,17 +47,39 @@ public class MainMapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Context ctx = getApplicationContext();
         //important! set your user agent to prevent getting banned from the osm servers
-        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
         setContentView(R.layout.main_page);
+        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx)); //changed line ??!!
 
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        TextView progressBar_msg = findViewById(R.id.progressBar_message);
+        Button settings_but = findViewById(R.id.settingsButton);
+
+        progressBar_msg.setText("Loading map...");
+        progressBar.setVisibility(0);
+        progressBar_msg.setVisibility(0);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        progressBar.setProgress(30);
         MapView map = (MapView) findViewById(R.id.MainMapView);
         IMapController mapController = map.getController();
-
+        progressBar.setProgress(50);
         getLocPerms();
+        progressBar.setProgress(60);
         getCurLoc(fusedLocationClient);
-
+        progressBar.setProgress(70);
         mapInit(map);
+        progressBar.setProgress(80);
+
+        progressBar_msg.setVisibility(4);
+        progressBar.setVisibility(4);
+
+        addMarker(map, new GeoPoint(38.089355, 23.785459));
+        mapController.setCenter(new GeoPoint(38.089355,23.785459));
+        settings_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainMapActivity.this,SettingsActivity.class));
+            }
+        });
     }
 
 
@@ -108,4 +141,11 @@ public class MainMapActivity extends AppCompatActivity {
                 && ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED)
             ActivityCompat.requestPermissions((Activity) this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, 123);
     }
+    public void addMarker(MapView mapView, GeoPoint geoPoint){
+        Marker startMarker = new Marker(mapView);
+        startMarker.setPosition(geoPoint);
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        mapView.getOverlays().add(startMarker);
+    }
+    //public void highlightMarker(MapView mapView)
 }

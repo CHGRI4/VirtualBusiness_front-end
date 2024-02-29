@@ -1,16 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText">
+
+    <TextView
+        android:id="@+id/progressBar_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="332dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar_message" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/settings_icon"
+        android:backgroundTint="@color/black"
+        android:backgroundTintMode="add"
+        android:outlineAmbientShadowColor="@color/black"
+        android:outlineSpotShadowColor="@color/black"
+        android:shadowColor="@color/black"
+        android:text="Settings"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <org.osmdroid.views.MapView
         android:id="@+id/MainMapView"
-        android:layout_width="360dp"
-        android:layout_height="423dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="408dp"
+        android:layout_height="429dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/markerHorView"
+        android:layout_width="409dp"
+        android:layout_height="147dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MainMapView">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/markerTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ιερός Ναός Αγίας Βαρβάρας"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/markerLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Χαλάνδρι, Αθήνα"
+                android:textSize="17sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/markerInfo"
+                android:layout_width="405dp"
+                android:layout_height="51dp"
+                android:text="Ο Ι.Ν. Αγίας Βαρβάρας Χαλανδρίου (Ψυχικού) , είναι μεταβυζαντινός ναός,  κτίσμα των αρχών του 18ου αιώνος, είναι μονόχωρος  καμαροσκέπαστος, με μεταγενέστερη προσθήκη διευρυμένου Νάρθηκα. Ο Ναός εσωτερικά είναι κατάγραφος, πλην της οροφής, από τοιχογραφίες ωσαύτως  του 18ου αιώνος, πολύ καλής τέχνης που αποδίδονται στην Σχολή του Γ. Μάρκου." />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="182dp"
+        android:layout_height="114dp"
+        android:layout_marginEnd="240dp"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/barbara_demo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/markerHorView" />
+
+    <ImageView
+        android:layout_width="169dp"
+        android:layout_height="108dp"
+        android:src="@drawable/barbara_demo2"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/markerHorView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

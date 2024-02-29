@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/return_to_main"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/round_button_shape"
+        android:text="Return to map page"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="390dp"
+        android:layout_height="267dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="168dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewProfileInfo"
+                android:layout_width="380dp"
+                android:layout_height="50dp"
+                android:shadowColor="@color/logo_grey"
+                android:shadowDx="3"
+                android:shadowDy="5"
+                android:shadowRadius="1"
+                android:text="Profile Info"
+                android:textColor="@color/logo_yellow"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/textViewUploadedMedia"
+                android:layout_width="380dp"
+                android:layout_height="50dp"
+                android:shadowColor="@color/logo_grey"
+                android:shadowDx="3"
+                android:shadowDy="5"
+                android:shadowRadius="1"
+                android:text="Uploaded media"
+                android:textColor="@color/logo_yellow"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/textViewAccountType"
+                android:layout_width="380dp"
+                android:layout_height="50dp"
+                android:shadowColor="@color/logo_grey"
+                android:shadowDx="3"
+                android:shadowDy="5"
+                android:shadowRadius="1"
+                android:text="Account Type Settings"
+                android:textColor="@color/logo_yellow"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/round_button_shape2"
+        android:id="@+id/settingsLogoutBut"
+        android:layout_width="217dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="35dp"
+        android:text="Logout"
+        android:textSize="25sp"
+        android:textStyle="italic"
+        android:textColor="@color/dark_red"
+        android:fontFamily="sans-serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
