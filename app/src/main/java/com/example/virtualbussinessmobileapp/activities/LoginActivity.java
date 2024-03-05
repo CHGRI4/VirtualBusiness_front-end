@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
-        LoggedUserInfo.email="Hello";
         username_input_field = findViewById(R.id.editTextLoginUsername);
         password_input_field = findViewById(R.id.editTextLoginPassword);
         login_button = findViewById(R.id.LoginButton);
@@ -96,11 +95,11 @@ public class LoginActivity extends AppCompatActivity {
                         public void run() {
                             //go to next page
                             assert loginResponse != null;
-                            LoggedUserInfo.username = subUsername;
-                            LoggedUserInfo.first_name = loginResponse.getName();
-                            LoggedUserInfo.surname = loginResponse.getSurname();
-                            LoggedUserInfo.email = loginResponse.getEmail();
-
+                            LoggedUserInfo.setUsername(subUsername);
+                            LoggedUserInfo.setFirst_name(loginResponse.getName());
+                            LoggedUserInfo.setSurname(loginResponse.getSurname());
+                            LoggedUserInfo.setEmail(loginResponse.getEmail());
+                            LoggedUserInfo.setNonce(loginResponse.getNonce());
                             startActivity(new Intent(LoginActivity.this, MainMapActivity.class));
                         }
                     },400);

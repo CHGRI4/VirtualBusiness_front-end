@@ -1,7 +1,7 @@
 package com.example.virtualbussinessmobileapp.networking.data;
 
 public class LoginResponse {
-    private String status, nonce, name, surname, email;
+    private String status, nonce, name, surname, email, acc_level;
 
     public String getStatus() {
         return status;

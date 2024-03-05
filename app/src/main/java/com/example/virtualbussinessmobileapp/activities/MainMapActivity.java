@@ -161,5 +161,5 @@ public class MainMapActivity extends AppCompatActivity {
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         mapView.getOverlays().add(startMarker);
     }
-    //public void highlightMarker(MapView mapView)
+
 }
