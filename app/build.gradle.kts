@@ -48,6 +48,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation ("org.osmdroid:osmdroid-android:6.1.14")
     implementation("com.google.android.gms:play-services-location:21.1.0")
+    implementation ("com.opencsv:opencsv:4.6")
     compileOnly("com.google.android.gms:play-services-location:21.1.0")
 
     testImplementation("junit:junit:4.13.2")

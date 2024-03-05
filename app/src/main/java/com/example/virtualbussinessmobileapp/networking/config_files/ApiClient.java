@@ -1,11 +1,13 @@
 package com.example.virtualbussinessmobileapp.networking.config_files;
 
+import com.example.virtualbussinessmobileapp.networking.data.GeneralInfo;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public abstract class ApiClient implements UserService{
+public abstract class ApiClient implements UserService {
     private static Retrofit getRetrofit(){
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

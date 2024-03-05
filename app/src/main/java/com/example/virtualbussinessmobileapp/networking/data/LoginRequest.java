@@ -1,6 +1,6 @@
 package com.example.virtualbussinessmobileapp.networking.data;
 
-public class LoginRequest {
+public class LoginRequest extends GeneralInfo{
     private String username, password;
 
     public String getUsername() {

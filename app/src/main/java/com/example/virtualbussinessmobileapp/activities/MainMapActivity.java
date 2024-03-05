@@ -13,17 +13,20 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RawRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.virtualbussinessmobileapp.R;
+import com.example.virtualbussinessmobileapp.networking.config_files.ApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
+import com.opencsv.CSVReader;
 
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
@@ -42,11 +45,25 @@ import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 import org.w3c.dom.Text;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.GET;
 
 /** @noinspection ALL*/
 public class MainMapActivity extends AppCompatActivity {
@@ -88,6 +105,7 @@ public class MainMapActivity extends AppCompatActivity {
                 startActivity(new Intent(MainMapActivity.this,SettingsActivity.class));
             }
         });
+        requestMonumentList();
     }
 
 
@@ -161,5 +179,36 @@ public class MainMapActivity extends AppCompatActivity {
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         mapView.getOverlays().add(startMarker);
     }
+    private void requestMonumentList(){
+        System.out.println("ENTERED FUN");
+        Call<CSVReader> Monuments = ApiClient.getUserService().getExcelFile();
+        Monuments.enqueue(new Callback<CSVReader>() {
+            @Override
+            public void onResponse(Call<CSVReader> call, Response<CSVReader> response) {
+                if(response.isSuccessful()){
+                    assert(Monuments!=null);
+                    try{
+                        CSVReader reader = (CSVReader) Monuments;
+                        String [] nextLine;
+                        while ((nextLine = reader.readNext()) != null) {
+                            // nextLine[] is an array of values from the line
+                            System.out.println(nextLine[0] + nextLine[1] + "etc...");
+                            Log.d("VariableTag", nextLine[0]);
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "The specified file was not found", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
 
+            @Override
+            public void onFailure(Call<CSVReader> call, Throwable t) {
+
+            }
+        });
+    }
+    private void loadMonuments(MapView mapView, MapController mapController){
+
+    }
 }
