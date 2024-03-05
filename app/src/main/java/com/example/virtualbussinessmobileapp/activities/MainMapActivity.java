@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -31,6 +33,13 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Overlay;
+import org.osmdroid.views.overlay.ScaleBarOverlay;
+import org.osmdroid.views.overlay.compass.CompassOverlay;
+import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
+import org.osmdroid.views.overlay.gridlines.LatLonGridlineOverlay2;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 import org.w3c.dom.Text;
 
 import android.view.View;
@@ -72,7 +81,6 @@ public class MainMapActivity extends AppCompatActivity {
         progressBar_msg.setVisibility(4);
         progressBar.setVisibility(4);
 
-        updateMap(new GeoPoint(38.089355, 23.785459));
         addMarker(map, new GeoPoint(38.089355, 23.785459));
         settings_but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +106,13 @@ public class MainMapActivity extends AppCompatActivity {
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
+        map.setMapOrientation(0);
+        Overlay locOverlay = new MyLocationNewOverlay(map); locOverlay.setEnabled(true);
+        Overlay scaleBarOverlay = new ScaleBarOverlay(map); scaleBarOverlay.setEnabled(true);
+        scaleBarOverlay.setEnabled(true);
+
+        map.getOverlays().add(scaleBarOverlay);
+        map.getOverlays().add(locOverlay);
     }
     private void getCurLoc(FusedLocationProviderClient fusedLocationClient2) {
         fusedLocationClient2.getCurrentLocation(
@@ -122,7 +137,6 @@ public class MainMapActivity extends AppCompatActivity {
                         } else {
                             double lat = location.getLatitude();
                             double lon = location.getLongitude();
-                            // Your further processing here
                             updateMap(new GeoPoint(lat, lon));
                         }
                     }

@@ -26,6 +26,8 @@ import com.example.virtualbussinessmobileapp.global_data.LoggedUserInfo;
 import com.example.virtualbussinessmobileapp.networking.data.LoginRequest;
 import com.example.virtualbussinessmobileapp.networking.data.LoginResponse;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         LoginResponseCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if(response.isSuccessful()) {
+                if(response.isSuccessful() && Objects.equals(Objects.requireNonNull(response.body()).getStatus(), "ok")) {
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                     LoginResponse loginResponse = response.body();
                     new Handler().postDelayed(new Runnable() {
@@ -101,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             startActivity(new Intent(LoginActivity.this, MainMapActivity.class));
                         }
-                    },700);
+                    },400);
                 }else{
                     Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
                 }
